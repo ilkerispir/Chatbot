@@ -4,8 +4,8 @@ const config = require('../config/keys');
 
 const projectID = config.googleProjectID;
 const credentials = {
-    client_email: config.client_email,
-    private_key: config.private_key
+    client_email: config.googleClientEmail,
+    private_key: config.googlePrivateKey
 }
 
 const sessionClient = new dialogflow.SessionsClient({projectID, credentials});
