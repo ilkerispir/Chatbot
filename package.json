@@ -1,0 +1,26 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "v12.15.0",
+    "npm": "6.13.4"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilkerispir/Chatbot.git"
+  },
+  "author": "Ilker Ispir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilkerispir/Chatbot/issues"
+  },
+  "homepage": "https://github.com/ilkerispir/Chatbot#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
