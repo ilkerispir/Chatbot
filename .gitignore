@@ -1,2 +1,4 @@
 node_modules
-.ideahero
+.idea
+package-lock.json
+config/dev.js
