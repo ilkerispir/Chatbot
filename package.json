@@ -8,7 +8,8 @@
     "npm": "6.13.4"
   },
   "scripts": {
-    "start": "nodemon"
+    "start": "node index.js",
+    "backend": "nodemon index.js"
   },
   "repository": {
     "type": "git",
