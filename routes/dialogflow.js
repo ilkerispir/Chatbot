@@ -3,7 +3,7 @@ const chatbot = require('../chatbot/chatbot');
 module.exports = app => {
 
     app.get('/', (req, res) => {
-        res.send({'hello': 'world'})
+        res.send({'hello': 'Johnny'});
     });
 
     app.post('/api/df_text_query', async (req, res) => {
