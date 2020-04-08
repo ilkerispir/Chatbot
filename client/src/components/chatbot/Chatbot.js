@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 import Message from './Message';
 import Card from './Card';
+import QuickReplies from './QuickReplies';
 
 const cookies = new Cookies();
 
@@ -17,6 +18,7 @@ class Chatbot extends Component {
         super(props);
         // This binding is necessary to make `this` work in the callback
         this._handleInputKeyPress = this._handleInputKeyPress.bind(this);
+        this._handleQuickReplyPayload = this._handleQuickReplyPayload.bind(this);
         this.state = {
             messages: []
         };
@@ -56,7 +58,6 @@ class Chatbot extends Component {
                 speaks: 'bot',
                 msg: msg
             }
-
             this.setState({ messages: [...this.state.messages, says]});
         }
     };
@@ -68,6 +69,19 @@ class Chatbot extends Component {
     componentDidUpdate() {
         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
         this.talkInput.focus();
+    }
+
+    _handleQuickReplyPayload(event, payload, text) {
+        event.preventDefault();
+        event.stopPropagation();
+        switch (payload) {
+            case 'product_masterclass':
+                this.df_event_query('MASTERCLASS');
+                break;
+            default:
+                this.df_text_query(text);
+                break;
+        }
     }
 
     renderCards(cards) {
@@ -94,6 +108,17 @@ class Chatbot extends Component {
                     </div>
                 </div>
             </div>
+        }else if (message.msg &&
+            message.msg.payload &&
+            message.msg.payload.fields &&
+            message.msg.payload.fields.quick_replies
+        ) {
+            return <QuickReplies
+                text={message.msg.payload.fields.text ? message.msg.payload.fields.text : null}
+                key={i}
+                replyClick={this._handleQuickReplyPayload}
+                speaks={message.speaks}
+                payload={message.msg.payload.fields.quick_replies.listValue.values}/>;
         }
     }
 
