@@ -3,6 +3,20 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const config = require('./config/keys');
+const mongoose = require('mongoose');
+
+mongoose.connect(
+    config.mongoURI,
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    },
+);
+mongoose.Promise = global.Promise;
+
+require('./models/Registration');
+
 app.use(bodyParser.json());
 
 require('./routes/dialogflow')(app);
