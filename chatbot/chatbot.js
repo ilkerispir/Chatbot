@@ -2,6 +2,7 @@ const dialogflow = require('dialogflow');
 const structjson = require('./structjson.js');
 const config = require('../config/keys');
 const mongoose = require('mongoose');
+const {WebhookClient} = require('dialogflow-fulfillment');
 
 const projectId = config.googleProjectID;
 const sessionId = config.dialogFlowSessionID;
@@ -62,23 +63,24 @@ module.exports = {
         let self = module.exports;
         let queryResult = responses[0].queryResult;
         switch (queryResult.action) {
+            
             case 'recommendproducts-yes':
                 console.log("deneme");
                 if (queryResult.allRequiredParamsPresent) {
+                    console.log("deneme");
                     self.saveRegistration(queryResult.parameters.fields);
                 }
                 break;
         }
 
-        //console.log(queryResult.action);
+        //console.log(queryResult);
         //console.log(queryResult.allRequiredParamsPresent);
-        // console.log(queryResult.fulfillmentMessages);
-        //console.log(queryResult.parameters.fields);
+        //console.log(queryResult.fulfillmentMessages);
+        //console.log(queryResult.parameters);
         return responses;
     },
-
+ 
     saveRegistration: async function(fields){
-        console.log("mongodb");
         const registration = new Registration({
             name: fields.name.stringValue,
             address: fields.address.stringValue,
